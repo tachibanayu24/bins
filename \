@@ -1,5 +1,0 @@
-#!/bin/sh
-
-global=$(curl -s ipinfo.io)
-
-echo "$global"
