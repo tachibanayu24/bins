@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-# If your connection is true, return your global and local IP.
+# If your connection is true, return your global and local IP, and copy local IP.
 
 global=$(curl -s inet-ip.info)
 local=$(ifconfig en0|grep inet|awk '{print $2}'|sed 1d)
@@ -12,5 +12,6 @@ fi
 
 echo "\033[34mGlobal IP\033[m: $global"
 echo "\033[35mLocal IP\033[m: $local"
+echo $local | pbcopy
 
 exit 0
