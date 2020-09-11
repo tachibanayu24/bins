@@ -5,9 +5,9 @@
 ```terminal
 $ cd ~
 
-$ git clone https://github.com/tachibanayu24/bins.git
+$ git clone https://github.com/tachibanayu24/commands.git
 
-$ mv bins bin
+$ mv commands bin
 
 $ PATH="~/bin:$PATH"
 
