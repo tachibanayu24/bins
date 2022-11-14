@@ -1,0 +1,31 @@
+#!/bin/zsh
+
+
+if [ $# -ne 3 ]; then
+    echo 'Usage: retry <COUNT> <WAIT_RETRY_SECS> "<CMD>"'
+    exit 1
+fi
+
+retries=$1
+wait_retry=$2
+command=$3
+
+for i in `seq 1 $retries`; do
+    echo "$command"
+
+    case "$i" in
+      *1[0-9] | *[04-9]) echo "ℹ️ Executing for the \033[36m${i}th\033[m time...";;
+      *1) echo "ℹ️ Executing for the \033[36m${i}st\033[m time...";;
+      *2) echo "ℹ️ Executing for the \033[36m${i}nd\033[m time...";;
+      *3) echo "ℹ️ Executing for the \033[36m${i}rd\033[m time...";;
+    esac
+
+    eval ${command}
+
+    ret_value=$?
+    [ $ret_value -eq 0 ] && break
+    echo "Failed with \033[31m${ret_value}\033[m, waiting to retry...\n"
+    sleep $wait_retry
+done
+
+exit $ret_value
